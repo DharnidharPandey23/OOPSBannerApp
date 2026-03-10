@@ -1,27 +1,13 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BannerApp {
 
-    // Inner class to store character and pattern
-    static class CharacterPattern {
-        char character;
-        String[] pattern;
-
-        CharacterPattern(char character, String[] pattern) {
-            this.character = character;
-            this.pattern = pattern;
-        }
-
-        public String[] getPattern() {
-            return pattern;
-        }
-    }
-
     public static void main(String[] args) {
 
-        Map<Character, CharacterPattern> patternMap = new HashMap<>();
+        Map<Character, String[]> patternMap = new HashMap<>();
 
-        patternMap.put('O', new CharacterPattern('O', new String[]{
+        patternMap.put('O', new String[]{
                 " ***** ",
                 "*     *",
                 "*     *",
@@ -29,9 +15,9 @@ public class BannerApp {
                 "*     *",
                 "*     *",
                 " ***** "
-        }));
+        });
 
-        patternMap.put('P', new CharacterPattern('P', new String[]{
+        patternMap.put('P', new String[]{
                 " ***** ",
                 "*     *",
                 "*     *",
@@ -39,9 +25,9 @@ public class BannerApp {
                 "*      ",
                 "*      ",
                 "*      "
-        }));
+        });
 
-        patternMap.put('S', new CharacterPattern('S', new String[]{
+        patternMap.put('S', new String[]{
                 " ***** ",
                 "*      ",
                 "*      ",
@@ -49,14 +35,18 @@ public class BannerApp {
                 "      *",
                 "      *",
                 " ***** "
-        }));
+        });
 
         String word = "OOPS";
 
         for (int row = 0; row < 7; row++) {
-            for (char c : word.toCharArray()) {
-                System.out.print(patternMap.get(c).getPattern()[row] + "   ");
+
+            for (char ch : word.toCharArray()) {
+
+                String[] pattern = patternMap.get(ch);
+                System.out.print(pattern[row] + "   ");
             }
+
             System.out.println();
         }
     }
