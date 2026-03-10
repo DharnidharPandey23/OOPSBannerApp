@@ -1,19 +1,27 @@
+import java.util.*;
+
 public class BannerApp {
 
-    public static void main(String[] args) {
+    // Inner class to store character and pattern
+    static class CharacterPattern {
+        char character;
+        String[] pattern;
 
-        String[] o = getO();
-        String[] p = getP();
-        String[] s = getS();
+        CharacterPattern(char character, String[] pattern) {
+            this.character = character;
+            this.pattern = pattern;
+        }
 
-        for (int i = 0; i < 7; i++) {
-            System.out.println(o[i] + "   " + o[i] + "   " + p[i] + "   " + s[i]);
+        public String[] getPattern() {
+            return pattern;
         }
     }
 
-    // Method for letter O
-    public static String[] getO() {
-        return new String[]{
+    public static void main(String[] args) {
+
+        Map<Character, CharacterPattern> patternMap = new HashMap<>();
+
+        patternMap.put('O', new CharacterPattern('O', new String[]{
                 " ***** ",
                 "*     *",
                 "*     *",
@@ -21,12 +29,9 @@ public class BannerApp {
                 "*     *",
                 "*     *",
                 " ***** "
-        };
-    }
+        }));
 
-    // Method for letter P
-    public static String[] getP() {
-        return new String[]{
+        patternMap.put('P', new CharacterPattern('P', new String[]{
                 " ***** ",
                 "*     *",
                 "*     *",
@@ -34,19 +39,25 @@ public class BannerApp {
                 "*      ",
                 "*      ",
                 "*      "
-        };
-    }
+        }));
 
-    // Method for letter S
-    public static String[] getS() {
-        return new String[]{
+        patternMap.put('S', new CharacterPattern('S', new String[]{
                 " ***** ",
-                "*     ",
-                "*     ",
+                "*      ",
+                "*      ",
                 " ***** ",
-                "     *",
-                "     *",
-                "***** "
-        };
+                "      *",
+                "      *",
+                " ***** "
+        }));
+
+        String word = "OOPS";
+
+        for (int row = 0; row < 7; row++) {
+            for (char c : word.toCharArray()) {
+                System.out.print(patternMap.get(c).getPattern()[row] + "   ");
+            }
+            System.out.println();
+        }
     }
 }
